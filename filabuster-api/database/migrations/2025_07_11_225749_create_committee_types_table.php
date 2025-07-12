@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Constants\TableData;
 
 return new class extends Migration
 {
@@ -11,13 +12,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('committee_types', function (Blueprint $table) {
+        Schema::create(TableData::COMMITTEE_TYPES['name'], function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->enum('code', [
                'C', 'D', 'E', 'H', 'I', 'N', 'O',
                'P', 'Q', 'S', 'U', 'V', 'W', 'X', 'Y', 'Z'
-            ]);
-            $table->integer('localization_id')->unsigned()->default(0);
+            ])->unique();
+            $table->tinyInteger('localization_id')->unsigned()->default(0);
             $table->string('name', 100);
             $table->text('description')->nullable();
             $table->boolean('is_pac')->default(false);
@@ -31,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('committee_types');
+        Schema::dropIfExists(TableData::COMMITTEE_TYPES['name']);
     }
 };

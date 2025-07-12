@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Constants\TableData;
+use App\Helpers\SeedHelper;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
 class CommitteeTypeSeeder extends Seeder
 {
     /**
@@ -14,7 +14,7 @@ class CommitteeTypeSeeder extends Seeder
     public function run(): void
     {
         //TODO: Preferably localize, rf db if so
-        $committeeTypes = [
+        $types = [
             ['code' => 'C', 'name' => 'Communication Cost', 'description' => 'Organizations that report communication costs', 'is_pac' => false, 'is_party' => false],
             ['code' => 'D', 'name' => 'Delegate', 'description' => 'Delegate committees for presidential nominating conventions', 'is_pac' => false, 'is_party' => false],
             ['code' => 'E', 'name' => 'Electioneering', 'description' => 'Electioneering communication organizations', 'is_pac' => false, 'is_party' => false],
@@ -33,15 +33,6 @@ class CommitteeTypeSeeder extends Seeder
             ['code' => 'Z', 'name' => 'National Party Non-Federal', 'description' => 'National party non-federal accounts', 'is_pac' => false, 'is_party' => true]
         ];
 
-        $localizationID = 0;
-        foreach ($committeeTypes as $type) {
-            $type['id'] = Str::uuid();
-            $type['localization_id'] = $localizationID;
-            DB::table('committee_types')->updateOrInsert(
-                ['code' => $type['code']],
-                $type
-            );
-            $localizationID++;
-        }
+        SeedHelper::seedLookupTable($types, TableData::COMMITTEE_TYPES);
     }
 }

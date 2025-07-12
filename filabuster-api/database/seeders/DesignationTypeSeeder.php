@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Constants\TableData;
+use App\Helpers\SeedHelper;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
 
 class DesignationTypeSeeder extends Seeder
 {
@@ -15,7 +15,7 @@ class DesignationTypeSeeder extends Seeder
     public function run(): void
     {
         //TODO: Preferably localize, rf db if needed
-        $designationTypes = [
+        $types = [
             ['code' => 'A', 'name' => 'Authorized by a candidate'],
             ['code' => 'J', 'name' => 'Joint fundraising committee'],
             ['code' => 'P', 'name' => 'Principal campaign committee of a candidate'],
@@ -24,15 +24,6 @@ class DesignationTypeSeeder extends Seeder
             ['code' => 'D', 'name' => 'Leadership PAC'],
         ];
 
-        $localizationID = 0;
-        foreach ($designationTypes as $type) {
-            $type['id'] = Str::uuid();
-            $type['localization_id'] = $localizationID;
-            DB::table('designation_types')->updateOrInsert(
-                ['code' => $type['code']],
-                $type
-            );
-            $localizationID++;
-        }
+        SeedHelper::seedLookupTable($types, TableData::DESIGNATION_TYPES);
     }
 }

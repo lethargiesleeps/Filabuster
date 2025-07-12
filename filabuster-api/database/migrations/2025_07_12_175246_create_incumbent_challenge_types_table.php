@@ -1,9 +1,9 @@
 <?php
 
-use App\Constants\TableData;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Constants\TableData;
 
 return new class extends Migration
 {
@@ -12,13 +12,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create(TableData::DESIGNATION_TYPES['name'], function (Blueprint $table) {
+        Schema::create(TableData::INCUMBENT_CHALLENGE_TYPES['name'], function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->enum('code', [
-                'A', 'J', 'P', 'U', 'B', 'D'
-            ])->unique();
+            $table->enum('code', ['I', 'C', 'O'])->unique();
+            $table->string('name')->unique();
             $table->tinyInteger('localization_id')->unsigned()->default(0);
-            $table->string('name', 100)->unique();
             $table->timestamps();
         });
     }
@@ -28,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists(TableData::DESIGNATION_TYPES['name']);
+        Schema::dropIfExists(TableData::INCUMBENT_CHALLENGE_TYPES['name']);
     }
 };

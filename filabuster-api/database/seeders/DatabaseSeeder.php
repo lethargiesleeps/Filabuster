@@ -21,10 +21,13 @@ class DatabaseSeeder extends Seeder
 //        ]);
 
         $this->call([
-           CommitteeTypeSeeder::class,
+            CommitteeTypeSeeder::class,
             DesignationTypeSeeder::class,
             OfficeTypeSeeder::class,
             PartyTypeSeeder::class,
+            StateSeeder::class,
+            CandidateStatusTypeSeeder::class,
+            IncumbentChallengeTypeSeeder::class
         ]);
     }
 }
