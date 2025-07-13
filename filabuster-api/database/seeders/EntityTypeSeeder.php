@@ -8,13 +8,13 @@ use App\Helpers\SeedHelper;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class DesignationTypeSeeder extends Seeder
+class EntityTypeSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        SeedHelper::seedLookupTable(StaticFECData::getStaticData(TableData::DESIGNATION_TYPES), TableData::DESIGNATION_TYPES);
+        SeedHelper::seedLookupTable(StaticFECData::getStaticData(TableData::ENTITY_TYPES), TableData::ENTITY_TYPES);
     }
 }

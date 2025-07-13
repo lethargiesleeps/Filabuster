@@ -4,6 +4,9 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use App\Constants\TableData;
+use App\Constants\Keys;
+use App\Constants\StaticFECData;
+use App\Helpers\Common;
 
 return new class extends Migration
 {
@@ -12,13 +15,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create(TableData::CANDIDATE_STATUS_TYPES['name'], function (Blueprint $table) {
-            $table->uuid('id')->primary();
-            $table->enum('code', [
-                'C', 'F', 'N', 'P'
-            ])->unique();
-            $table->string('name')->unique();
-            $table->tinyInteger('localization_id')->unsigned()->default(0);
+        Schema::create(TableData::CANDIDATE_STATUS_TYPES[Keys::NAME], function (Blueprint $table) {
+            $table->uuid(Keys::ID)->primary();
+            $table->enum(Keys::CODE, Common::getArrayValues(StaticFECData::getStaticData(TableData::CANDIDATE_STATUS_TYPES), Keys::CODE))->index();
+            $table->string(Keys::NAME)->unique();
+            $table->tinyInteger(Keys::LOCALIZATION_ID)->unsigned()->default(0);
             $table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists(TableData::CANDIDATE_STATUS_TYPES['name']);
+        Schema::dropIfExists(TableData::CANDIDATE_STATUS_TYPES[Keys::NAME]);
     }
 };

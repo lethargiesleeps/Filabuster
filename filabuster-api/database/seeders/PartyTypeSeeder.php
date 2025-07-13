@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Constants\StaticFECData;
 use App\Constants\TableData;
 use App\Helpers\SeedHelper;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -15,14 +16,6 @@ class PartyTypeSeeder extends Seeder
      */
     public function run(): void
     {
-        //TODO: Preferably localize, rf db if so
-        $types = [
-            ['code' => 'DEM', 'name' => 'Democrat'],
-            ['code' => 'REP', 'name' => 'Republican'],
-            ['code' => 'IND', 'name' => 'Independent'],
-
-        ];
-
-        SeedHelper::seedLookupTable($types, TableData::PARTY_TYPES);
+        SeedHelper::seedLookupTable(StaticFECData::getStaticData(TableData::PARTIES), TableData::PARTIES);
     }
 }

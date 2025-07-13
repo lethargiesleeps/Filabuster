@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Constants\StaticFECData;
 use App\Constants\TableData;
 use App\Helpers\SeedHelper;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -14,12 +15,6 @@ class IncumbentChallengeTypeSeeder extends Seeder
      */
     public function run(): void
     {
-        $types = [
-            ['code' => 'I', 'name' => 'Incumbent'],
-            ['code' => 'C', 'name' => 'Challenger'],
-            ['code' => 'O', 'name' => 'Open'],
-        ];
-
-        SeedHelper::seedLookupTable($types, TableData::INCUMBENT_CHALLENGE_TYPES);
+        SeedHelper::seedLookupTable(StaticFECData::getStaticData(TableData::INCUMBENT_CHALLENGE_TYPES), TableData::INCUMBENT_CHALLENGE_TYPES);
     }
 }

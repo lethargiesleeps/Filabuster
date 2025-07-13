@@ -27,7 +27,15 @@ class DatabaseSeeder extends Seeder
             PartyTypeSeeder::class,
             StateSeeder::class,
             CandidateStatusTypeSeeder::class,
-            IncumbentChallengeTypeSeeder::class
+            IncumbentChallengeTypeSeeder::class,
+            FilingFrequencyTypeSeeder::class,
+            OrganizationTypeSeeder::class,
+            ReportTypeSeeder::class,
+            AmendmentTypeSeeder::class,
+            EntityTypeSeeder::class,
+            RequestTypeSeeder::class,
+            DocumentTypeSeeder::class,
+            FormTypeSeeder::class
         ]);
     }
 }

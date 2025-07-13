@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Constants\StaticFECData;
 use App\Constants\TableData;
 use App\Helpers\SeedHelper;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -15,12 +16,6 @@ class OfficeTypeSeeder extends Seeder
      */
     public function run(): void
     {
-        $types= [
-            ['code' => 'H', 'name' => 'House of Representatives'],
-            ['code' => 'S', 'name' => 'Senate'],
-            ['code' => 'P', 'name' => 'Presidential'],
-        ];
-
-        SeedHelper::seedLookupTable($types, TableData::OFFICE_TYPES);
+        SeedHelper::seedLookupTable(StaticFECData::getStaticData(TableData::OFFICE_TYPES), TableData::OFFICE_TYPES);
     }
 }

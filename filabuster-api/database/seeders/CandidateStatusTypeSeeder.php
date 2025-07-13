@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Constants\StaticFECData;
 use App\Constants\TableData;
 use App\Helpers\SeedHelper;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -14,13 +15,6 @@ class CandidateStatusTypeSeeder extends Seeder
      */
     public function run(): void
     {
-        $types = [
-            ['code' => 'C', 'name' => 'Present Candidate'],
-            ['code' => 'F', 'name' => 'Future Candidate'],
-            ['code' => 'N', 'name' => 'Not Yet a Candidate'],
-            ['code' => 'P', 'name' => 'Prior Candidate'],
-        ];
-
-        SeedHelper::seedLookupTable($types, TableData::CANDIDATE_STATUS_TYPES);
+        SeedHelper::seedLookupTable(StaticFECData::getStaticData(TableData::CANDIDATE_STATUS_TYPES), TableData::CANDIDATE_STATUS_TYPES);
     }
 }
